@@ -14,15 +14,15 @@ fi
 
 case "$1" in
     "select")
-        scrot '/tmp/%F_%T_$wx$h.jpg' -sf -e '$(VIEWER) $f && rm $f'
+        scrot '/tmp/%F_%T_$wx$h.jpg' -sf -e 'fehprime $f && rm $f'
         ;;
     "full")
-        scrot '/tmp/%F_%T_$wx$h.jpg' -e '$(VIEWER) $f && rm $f'
+        scrot '/tmp/%F_%T_$wx$h.jpg' -e 'fehprime $f && rm $f'
         ;;
     "left")
-        scrot '/tmp/%F_%T_$wx$h.jpg' -a $LEFT -e '$(VIEWER) $f && rm $f'
+        scrot '/tmp/%F_%T_$wx$h.jpg' -a $LEFT -e 'fehprime $f && rm $f'
         ;;
     "right")
-        scrot '/tmp/%F_%T_$wx$h.jpg' -a $RIGHT -e '$(VIEWER) $f && rm $f'
+        scrot '/tmp/%F_%T_$wx$h.jpg' -a $RIGHT -e 'fehprime $f && rm $f'
         ;;
 esac

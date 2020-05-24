@@ -5,5 +5,7 @@
 
 feh "$@" -B "white" -g "1280x720+360+180" -. -Z \
     --action1 'xclip -selection clipboard -t image/png -i %F' \
-    --action2 'cp %F ~/documents/pictures/screenshots/'
-# TODO: -- action3 'select dir and file name'
+    --action2 'cp %F ~/documents/pictures/screenshots/' \
+    --action3 'cp %F ~/`find . -type d ! -path "*/.*" ! -path "*/git-clones/*" | \
+    sed "s/^..//" | dmenu -p "select dir" -l 10`/`dmenu -p "select name"`.jpg'
+
