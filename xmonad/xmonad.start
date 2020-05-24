@@ -1,0 +1,17 @@
+#!/usr/bin/sh
+
+# layout is toggled from within XMonad.
+# TODO: convert this command to a one-time action in XMonad
+setxkbmap us -option altwin:swap_lalt_lwin,lv3:ralt_switch_multikey
+xmodmap -e "keycode 105 = Caps_Lock"
+
+# check how many screens available
+SCREENS=$(xrandr -q | grep -w connected | wc -l)
+
+if [ $SCREENS -eq 2 ]; then
+    autorandr --load twoHeads
+fi
+
+feh --bg-scale .wallpaper
+
+exec ~/.local/bin/xmonad

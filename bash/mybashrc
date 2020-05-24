@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+eval "$(stack --bash-completion-script stack)"
+source <(kitty + complete setup bash)
+
+for file in ~/.bash/*.sh
+do
+    source $file
+done
+
+#avoid nested rangers
+ranger() {
+    if [ -z "$RANGER_LEVEL" ]; then
+        /usr/bin/ranger "$@"
+    else 
+        exit
+    fi
+}

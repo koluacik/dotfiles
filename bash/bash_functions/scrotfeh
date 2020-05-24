@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+SCREENS=$(xrandr -q | grep -w connected | wc -l)
+
+# Use any image viewer you like.
+VIEWER=fehprime
+
+LEFT=0,0,1920,1080
+RIGHT=0,0,1920,1080
+
+if [ $SCREENS -eq 2 ]; then
+    RIGHT=1920,0,1920,1080
+fi
+
+case "$1" in
+    "select")
+        scrot '/tmp/%F_%T_$wx$h.jpg' -sf -e '$(VIEWER) $f && rm $f'
+        ;;
+    "full")
+        scrot '/tmp/%F_%T_$wx$h.jpg' -e '$(VIEWER) $f && rm $f'
+        ;;
+    "left")
+        scrot '/tmp/%F_%T_$wx$h.jpg' -a $LEFT -e '$(VIEWER) $f && rm $f'
+        ;;
+    "right")
+        scrot '/tmp/%F_%T_$wx$h.jpg' -a $RIGHT -e '$(VIEWER) $f && rm $f'
+        ;;
+esac
