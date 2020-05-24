@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
 
 ln -sf $PWD/autorandr $HOME/.config/
-ln -sf $PWD/bash $HOME/.bash
+ln -sf "$PWD/bash" "$HOME/.bash"
 ln -sf $PWD/dunst $HOME/.config/
 ln -sf $PWD/kitty $HOME/.config/
 ln -sf $PWD/nvim $HOME/.config/
 ln -sf $PWD/ranger $HOME/.config/
 ln -sf $PWD/stylish-haskell $HOME/.config/
-ln -sf $PWD/xmonad/xmonad.hs $HOME/.xmonad/xmonad.hs
-ln -sf $PWD/xmonad/xmonad.start $HOME/.xmonad/xmonad.start
+ln -sf $PWD/xmonad/xmonad.hs $HOME/.xmonad/
+ln -sf $PWD/xmonad/xmonad.start $HOME/.xmonad/
+
+#for file in bash/bash_functions/*
+#do
+#    echo $file
+#    if [ -x "$file" ]; then
+#        ln -sf $PWD/$file $HOME/.local/bin
+#    fi
+#done
