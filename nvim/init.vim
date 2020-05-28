@@ -40,7 +40,7 @@ set list          " Display unprintable characters f12 - switches
 set listchars=tab:•\ ,trail:•,extends:»,precedes:« " Unprintable chars mapping
 noremap <silent><leader>l :set list!<CR>
 
-let g:haskell_indent_guard = 4
+let g:haskell_indent_guard = 2
 let g:haskell_indent_after_bare_where = 2
 let g:haskell_indent_before_where = 2
 
