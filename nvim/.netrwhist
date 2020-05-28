@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =3
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/home/deniz/dotfiles/stylish-haskell'
 let g:netrw_dirhist_3='/home/deniz/git-clones/dmenu-4.9'
 let g:netrw_dirhist_2='/home/deniz/git-clones/dmenu-4.9/.git'
 let g:netrw_dirhist_1='/home/deniz/git-clones/dotfiles/configs/kitty'

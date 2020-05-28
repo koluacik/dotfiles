@@ -2,7 +2,7 @@ export VISUAL=nvim
 export EDITOR=nvim
 export GPG_TTY=$(tty)
 
-PATH=/home/deniz/.local/bin:$PATH
+PATH=/home/deniz/.cargo/bin:/home/deniz/.local/bin:$PATH
 eval "$(stack --bash-completion-script stack)"
 source <(kitty + complete setup bash)
 
