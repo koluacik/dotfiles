@@ -1,0 +1,22 @@
+Config { font = "xft:Iosevka Term:pixelsize=13:antialias=true:style=medium:hinting=true"
+       , bgColor = "white"
+       , fgColor = "black"
+       , position = TopW L 100
+       , sepChar = "%"
+       , alignSep = "\/"
+       , template = "%StdinReader% \%locks% %kbd% / %battery% | %date% "
+       , commands = [ Run Swap [] 10
+                    , Run Date "%a %b %_d %l:%M" "date" 10
+                    , Run StdinReader
+                    , Run Kbd [("us","US"),("tr","TR")]
+                    , Run Locks
+                    , Run Battery
+                        ["-t", "<acstatus>"
+                        , "--", "-O", "<fc=#19cb00>+ <left></fc>", "-o", "<left>"
+                        , "-L", "10", "-H", "60"
+                        , "-l", "red", "-m", "orange", "-h", "black"
+                        , "-p", "#19cb00"
+                        , "-i", "", "-P"
+                        ] 1
+                    ]
+       }
