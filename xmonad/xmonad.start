@@ -2,6 +2,10 @@
 
 # layout is toggled from within XMonad.
 # TODO: convert this command to a one-time action in XMonad
+
+xcompmgr &
+dunst &
+
 setxkbmap us -option altwin:swap_lalt_lwin,lv3:ralt_switch_multikey
 xmodmap -e "keycode 105 = Caps_Lock"
 
