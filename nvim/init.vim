@@ -7,58 +7,40 @@
 "▀▀    ▀▀   ▝▀▀▀▀▀     ▀▀▀▀       ▀▀     ▀▀  ▀▀  ▀▀  ▀▀
 
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'chrisbra/Colorizer'                       " highlight colors
-Plug 'tpope/vim-fugitive'                       " vim plugin for git
-Plug 'chriskempson/base16-vim'                  " base16 themes
-Plug 'vim-airline/vim-airline'                  " airline
-Plug 'vim-airline/vim-airline-themes'           " airline themes
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " coc.nvim
 Plug 'neovimhaskell/haskell-vim'                " haskell-vim
-"Plug 'sdiehl/vim-ormolu'                        " haskell-vim
-"Plug 'nbouscal/vim-stylish-haskell'             " stylish haskell
-Plug 'godlygeek/tabular'                        " tabular (aligns text)
-
 call plug#end()
 
 "split panes below/right the old one
-"enable hiding unsaved buffers
-"enable mouse
-"enable line numbers
 set splitbelow splitright hidden mouse=a nu
 
 set termguicolors
-"colo base16-atelier-sulphurpool-light
 colo default
 set background=light
-let g:airline_theme='xtermlight'
 set signcolumn = "auto:1"
 
+set ignorecase smartcase incsearch
+set shortmess+=rwIcs
+set laststatus=1
+
+hi NonText guifg=White
+hi LineNr guifg=Gray
 hi VertSplit gui=NONE
 hi SignColmn gui=NONE guifg=black guibg=white
-
-set list          " Display unprintable characters f12 - switches
-set listchars=tab:•\ ,trail:•,extends:»,precedes:« " Unprintable chars mapping
-noremap <silent><leader>l :set list!<CR>
+hi StatusLine gui=NONE cterm=NONE guifg=Gray
+hi StatusLineNC gui=NONE cterm=NONE guifg=Gray
 
 let g:haskell_indent_guard = 2
 let g:haskell_indent_after_bare_where = 2
 let g:haskell_indent_before_where = 2
 
-let g:colorizer_x11_names = 1
-"highlight rgb colors
-" black cyan red yellow 
-" #123123 #f0f800
-
 noremap <leader><leader> "+
 noremap <leader>yg :%y+<CR>
 nnoremap <silent><Esc> :noh<CR>
 tnoremap <silent><C-q> <C-\><C-n>
+
 command! Evimrc edit $MYVIMRC
 
-set ignorecase smartcase incsearch
-"shortmess = filnxtToOF
-set shortmess+=rwIcs
-set noshowmode
 au TermOpen * setlocal nonumber norelativenumber signcolumn=no
 
 "bindigs and settings for coc
