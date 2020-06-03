@@ -47,11 +47,12 @@ myLayout = (avoidStruts $ Tall 1 (3/100) (1/2)) ||| (avoidStruts $ Mirror $ Tall
 myManageHook =
     composeAll
     [ insertPosition Below Newer
-        , manageDocks
-        , manageHook defaultConfig
-        , isDialog --> doFloat
-        , className =? "Sxiv" --> doFloat
-        , className =? "feh" --> doFloat
+    , manageDocks
+    , manageHook defaultConfig
+    , isDialog --> doFloat
+    , className =? "Sxiv" --> doFloat
+    , className =? "feh" --> doFloat
+    , className =? "keepassxc" --> doFloat
     ]
 
 myStartupHook = dynStatusBarStartup startBar killBars
