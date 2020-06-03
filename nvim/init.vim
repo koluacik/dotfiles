@@ -18,6 +18,7 @@ set termguicolors
 colo default
 set background=light
 set signcolumn = "auto:1"
+syntax off
 
 set ignorecase smartcase incsearch
 set shortmess+=rwIcs
@@ -93,4 +94,4 @@ nmap <leader>rn <Plug>(coc-rename)
 
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-set expandtab  shiftwidth=4 softtabstop=-1
+set expandtab  shiftwidth=2 softtabstop=-1
