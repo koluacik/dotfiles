@@ -53,6 +53,7 @@ myManageHook =
     , className =? "Sxiv" --> doFloat
     , className =? "feh" --> doFloat
     , className =? "keepassxc" --> doFloat
+    , className =? "Pavucontrol" --> doFloat
     ]
 
 myStartupHook = dynStatusBarStartup startBar killBars
@@ -110,7 +111,7 @@ myKeys' =
         , ("<XF86AudioRaiseVolume>", spawn "amixer -D pulse sset Master 5%+")
         , ("<XF86AudioLowerVolume>", spawn "amixer -D pulse sset Master 5%-")
         , ("<XF86MonBrightnessUp>", spawn "brightnessctl s +10%")
-        , ("<XF86MonBrightnessDown>", spawn "brightnessctl s -10%")
+        , ("<XF86MonBrightnessDown>", spawn "brightnessctl s 10%-")
     ]
 
 myButtons =
