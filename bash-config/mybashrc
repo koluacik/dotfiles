@@ -8,6 +8,11 @@ do
     source $file
 done
 
+for file in ~/.bash/bash_functions/*.sh
+do
+  source $file
+done
+
 #avoid nested rangers
 ranger() {
     if [ -z "$RANGER_LEVEL" ]; then
