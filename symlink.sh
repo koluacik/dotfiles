@@ -11,7 +11,7 @@ ln -sf $PWD/xmonad/xmonad.hs $HOME/.xmonad/
 ln -sf $PWD/xmonad/xmonad.start $HOME/.xmonad/
 ln -sf $PWD/xmobar/xmobarrc $HOME/.xmobarrc
 
-for file in bash-config/bash_functions/*
+for file in bash-config/bash_commands/*
 do
     echo $file
     if [ -x "$file" ]; then
