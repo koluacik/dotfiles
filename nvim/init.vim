@@ -9,7 +9,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " coc.nvim
 Plug 'neovimhaskell/haskell-vim'                " haskell-vim
-Plug 'lilydjwg/colorizer'
+"Plug 'lilydjwg/colorizer'
 call plug#end()
 
 "split panes below/right the old one
