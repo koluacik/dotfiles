@@ -9,6 +9,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " coc.nvim
 Plug 'neovimhaskell/haskell-vim'                " haskell-vim
+Plug 'lilydjwg/colorizer'
 call plug#end()
 
 "split panes below/right the old one
@@ -24,6 +25,7 @@ set ignorecase smartcase incsearch
 set shortmess+=rwIcs
 set laststatus=1
 
+hi Pmenu guibg=grey90
 hi NonText guifg=White
 hi LineNr guifg=Gray
 hi VertSplit gui=NONE
