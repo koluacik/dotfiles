@@ -1,9 +1,9 @@
-#!/usr/bin/sh
+#/usr/bin/sh
 
 # layout is toggled from within XMonad.
 # TODO: convert this command to a one-time action in XMonad
 
-xcompmgr &
+# xcompmgr -r 0 -o 0 -l 0 -t 0 -C -n
 dunst &
 
 setxkbmap us -option altwin:swap_lalt_lwin,lv3:ralt_switch_multikey
@@ -17,5 +17,7 @@ if [ $SCREENS -eq 2 ]; then
 fi
 
 feh --bg-scale .wallpaper
+
+xsetroot -cursor_name left_ptr &
 
 exec ~/.local/bin/xmonad
