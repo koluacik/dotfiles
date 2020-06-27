@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+DEVICEID=$(xinput | grep -i --color=never "touch\|pad\|elan\|etps" | \
+    cut -f 2 | cut -c 4-)
+
+TAPPING=$(xinput list-props $DEVICEID | grep -i --color=never "tapping enabled"\
+    | grep -E -o "\([0-9]+\)" | tr -d '()' | head -n 1)
+
+SCROLLING=$(xinput list-props $DEVICEID | grep -i --color=never "natural scrol"\
+    | grep -E -o "\([0-9]+\)" | tr -d '()' | head -n 1)
+
+xinput set-prop $DEVICEID $TAPPING 1
+xinput set-prop $DEVICEID $SCROLLING 1
