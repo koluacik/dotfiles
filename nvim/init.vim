@@ -6,32 +6,29 @@
 "██    ██  ▜█▙▄▄▄▟▊  ▀██▙▟██▀   ▝████▘   ██  ██  ██  ██
 "▀▀    ▀▀   ▝▀▀▀▀▀     ▀▀▀▀       ▀▀     ▀▀  ▀▀  ▀▀  ▀▀
 
+set background=light
+
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " coc.nvim
 Plug 'neovimhaskell/haskell-vim'                " haskell-vim
-"Plug 'lilydjwg/colorizer'
+Plug 'lifepillar/vim-solarized8'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'gko/vim-coloresque'
 call plug#end()
 
 "split panes below/right the old one
 set splitbelow splitright hidden mouse=a nu
 
+hi! link TermCursor TermCursorNC
+hi link CocFloating markdown
 set termguicolors
-colo default
-set background=light
-set signcolumn = "auto:1"
-syntax off
 
 set ignorecase smartcase incsearch
 set shortmess+=rwIcs
-set laststatus=1
+set noshowmode
 
-hi Pmenu guibg=grey90
-hi NonText guifg=White
-hi LineNr guifg=Gray
-hi VertSplit gui=NONE
-hi SignColmn gui=NONE guifg=black guibg=white
-hi StatusLine gui=NONE cterm=NONE guifg=Gray
-hi StatusLineNC gui=NONE cterm=NONE guifg=Gray
+colo solarized8_flat
 
 let g:haskell_indent_guard = 2
 let g:haskell_indent_after_bare_where = 2
@@ -52,9 +49,6 @@ au TermOpen * setlocal nonumber norelativenumber signcolumn=no
 " delays and poor user experience.
 set updatetime=300
 
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-" set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -91,9 +85,12 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+autocmd Filetype markdown setlocal textwidth=80 fo+=at
+autocmd Filetype text setlocal textwidth=80 fo+=at
+
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-set expandtab  shiftwidth=2 softtabstop=-1
+set expandtab shiftwidth=2 softtabstop=-1

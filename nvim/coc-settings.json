@@ -1,19 +1,23 @@
 {
-    "languageserver": {
-        "haskell": {
-            "command": "stack",
-            "args": ["exec ghcide --lsp"],
-            "rootPatterns": [
-                "*.cabal",
-                "stack.yaml",
-                "cabal.project",
-                "package.yaml"
-            ],
-            "filetypes": [
-                "hs",
-                "lhs",
-                "haskell"
-            ]
-            }
-        }
+"languageserver": {
+  "haskell": {
+    "command": "stack",
+    "args": ["exec", "haskell-language-server-wrapper", "--", "--lsp"],
+    "rootPatterns": [
+      "*.cabal",
+      "stack.yaml",
+      "cabal.project",
+      "package.yaml"
+    ],
+    "filetypes": [
+      "hs",
+      "lhs",
+      "haskell"
+    ],
+    "initializationOptions": {
+      "haskell": {
+      }
     }
+  }
+}
+}

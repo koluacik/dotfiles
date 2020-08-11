@@ -1,3 +1,4 @@
+import qualified Data.Map.Strict as M
 import           System.IO
 import           System.Process
 
@@ -15,11 +16,12 @@ import           XMonad.Util.EZConfig
 import           XMonad.Util.Run
 
 main = xmonad . fullscreenSupport . X.H.E.ewmh . docks $
-    myConfig' `additionalKeys` myKeys `additionalMouseBindings` myButtons `additionalKeysP` myKeys'
+    myConfig' `additionalKeys` myKeys `additionalMouseBindings` myButtons
+    `additionalKeysP` mediaKeys
 
 myConfig' =
     docks $
-        defaultConfig
+        def
             { terminal = myTerminal
             , layoutHook = myLayoutHook
             , manageHook = myManageHook
@@ -27,6 +29,8 @@ myConfig' =
             , logHook = myLogHook
             , startupHook = myStartupHook
             , modMask = myModMask
+            , normalBorderColor = (selectColor' "color8")
+            , focusedBorderColor = (selectColor' "color3")
             }
 
 myTerminal = "kitty"
@@ -35,14 +39,15 @@ myModMask = mod4Mask
 
 myLayoutHook = myLayout
 
-myLayout = (avoidStruts $ tall) ||| (avoidStruts $ Mirror $ tall) ||| noBorders Full
+myLayout = (avoidStruts $ tall) ||| (avoidStruts $ Mirror $ tall) |||
+  noBorders Full
   where
     tall = (Tall 1 (3/100) (1/2))
 
 myManageHook =
     composeAll
     [ insertPosition Below Newer
-    , manageHook defaultConfig
+    , manageHook def
     , isDialog --> doFloat
     , className =? "Sxiv" --> doFloat
     , className =? "feh" --> doFloat
@@ -53,7 +58,8 @@ myManageHook =
 
 myStartupHook = dynStatusBarStartup startBar killBars
 
-myEventHook = handleEventHook def <+> X.H.E.fullscreenEventHook <+> dynStatusBarEventHook startBar killBars
+myEventHook = handleEventHook def <+> X.H.E.fullscreenEventHook <+>
+  dynStatusBarEventHook startBar killBars
 
 myLogHook = myMultiPP
 
@@ -67,37 +73,26 @@ myMultiPP = multiPP focusedPP unfocusedPP
   where
     focusedPP =
         xmobarPP
-            { ppCurrent = xmobarColor "black" "" . myWrap
+            { ppCurrent = xmobarColor (selectColor' "color3") "" . wrap "[" "]"
             , ppTitle = const ""
             , ppVisible = const ""
             , ppVisibleNoWindows = Just $ const ""
-            , ppHidden = xmobarColor "black" "" . wrap "<" ">"
-            , ppUrgent = xmobarColor "red" "" . myWrap
+            , ppHidden = xmobarColor (selectColor' "color7") "" . wrap "<" ">"
+            , ppUrgent = xmobarColor (selectColor' "Color17") "" . wrap "[" "]"
             , ppSep = " | "
             }
-    unfocusedPP =
-        xmobarPP
-            { ppCurrent = xmobarColor "black" "" . myWrap
-            , ppTitle = const ""
-            , ppVisible = const ""
-            , ppVisibleNoWindows = Just $ const ""
-            , ppHidden = xmobarColor "black" "" . wrap "<" ">"
-            , ppUrgent = xmobarColor "black" "" . myWrap
-            , ppSep = " | "
-            }
-
-myWrap :: String -> String
-myWrap = wrap "[" "]"
+    unfocusedPP = focusedPP
+      { ppCurrent = xmobarColor (selectColor' "color7") "" . wrap "[" "]" }
 
 myKeys =
     [ ((myModMask .|. controlMask, xK_space      ), liftIO switchXkbLayout)
-    , ((myModMask                , xK_bracketleft), spawn "sleep 1.2; scrotfeh")
     , ((myModMask                , xK_Print      ), spawn "scrotfeh select")
     , ((myModMask .|. controlMask, xK_p          ), spawn
-            "echo 'select\nright\nleft\nfull' | dmenu -p 'screenshot mode' | xargs scrotfeh")
+            "echo 'select\nright\nleft\nfull' | dmenu -p 'screenshot mode' | \
+             \ xargs scrotfeh")
     ]
 
-myKeys' =
+mediaKeys =
     [ ("<XF86AudioPlay>"        , spawn "playerctl play-pause")
     , ("<XF86AudioPrev>"        , spawn "playerctl previous")
     , ("<XF86AudioNext>"        , spawn "playerctl next")
@@ -124,5 +119,49 @@ switchXkbLayout = do
 getXkbLayout :: IO String
 getXkbLayout = do
     let processString = "setxkbmap -query | grep layout | tail -c 3"
-    (_, Just hout, _, _) <- createProcess (shell processString) {std_out = CreatePipe}
+    (_, Just hout, _, _) <- createProcess (shell processString)
+      {std_out = CreatePipe}
     hGetLine hout
+
+type HexColor = String
+type ColorName = String
+type Colors = M.Map ColorName HexColor
+data Palette =
+  Colors { getColors :: !Colors
+         , getFallBack :: !HexColor }
+
+myPalette :: Palette
+myPalette = Colors colors fallback
+  where
+    fallback = head . M.keys $ colors
+    colors = M.fromList [ ("color0" , "#fdf6e3")
+                        , ("color1" , "#dc322f")
+                        , ("color2" , "#859900")
+                        , ("color3" , "#b58900")
+                        , ("color4" , "#268bd2")
+                        , ("color5" , "#6c71c4")
+                        , ("color6" , "#2aa198")
+                        , ("color7" , "#586e75")
+                        , ("color8" , "#839496")
+                        , ("color9" , "#dc322f")
+                        , ("color10", "#859900")
+                        , ("color11", "#b58900")
+                        , ("color12", "#268bd2")
+                        , ("color13", "#6c71c4")
+                        , ("color14", "#2aa198")
+                        , ("color15", "#002b36")
+                        , ("color16", "#cb4b16")
+                        , ("color17", "#d33682")
+                        , ("color18", "#eee8d5")
+                        , ("color19", "#93a1a1")
+                        , ("color20", "#657b83")
+                        , ("color21", "#073642") 
+                        ]
+
+selectColor :: Palette -> ColorName -> HexColor
+selectColor p cn = case M.lookup cn (getColors p) of
+                     Just hex -> hex
+                     _ -> getFallBack p
+
+selectColor' :: ColorName -> HexColor
+selectColor' = selectColor myPalette
