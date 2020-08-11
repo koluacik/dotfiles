@@ -46,10 +46,10 @@ steps:
   # Align the right hand side of some elements.  This is quite conservative
   # and only applies to statements where each element occupies a single
   # line. All default to true.
-  #- simple_align:
-  #    cases: true
-  #    top_level_patterns: true
-  #    records: true
+  - simple_align:
+      cases: true
+      top_level_patterns: true
+      records: true
 
   # Import cleanup
   - imports:
@@ -144,7 +144,7 @@ steps:
       #   >     )
       #
       # Default: inline
-      long_list_align: multiline
+      long_list_align: new_line_multiline
 
       # Align empty list (importing instances)
       #
