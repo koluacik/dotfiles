@@ -5,17 +5,16 @@ import           System.Process
 import           XMonad
 import           XMonad.Hooks.DynamicBars
 import           XMonad.Hooks.DynamicLog
-import qualified XMonad.Hooks.EwmhDesktops   as X.H.E
+import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.InsertPosition
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Hooks.ManageHelpers
-import           XMonad.Layout.Fullscreen
 import           XMonad.Layout.NoBorders
 import qualified XMonad.StackSet             as W
 import           XMonad.Util.EZConfig
 import           XMonad.Util.Run
 
-main = xmonad . fullscreenSupport . X.H.E.ewmh . docks $
+main = xmonad . ewmhFullscreen . ewmh . docks $
     myConfig' `additionalKeys` myKeys `additionalMouseBindings` myButtons
     `additionalKeysP` mediaKeys
 
@@ -58,7 +57,7 @@ myManageHook =
 
 myStartupHook = dynStatusBarStartup startBar killBars
 
-myEventHook = handleEventHook def <+> X.H.E.fullscreenEventHook <+>
+myEventHook = handleEventHook def <+>
   dynStatusBarEventHook startBar killBars
 
 myLogHook = myMultiPP
