@@ -28,8 +28,9 @@ myConfig' =
             , logHook = myLogHook
             , startupHook = myStartupHook
             , modMask = myModMask
-            , normalBorderColor = (selectColor' "color8")
-            , focusedBorderColor = (selectColor' "color3")
+            , borderWidth = 1
+            , normalBorderColor = (selectColor' "color19")
+            , focusedBorderColor = (selectColor' "color1")
             }
 
 myTerminal = "kitty"
