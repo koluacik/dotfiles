@@ -15,6 +15,7 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'gko/vim-coloresque'
+Plug 'junegunn/vim-easy-align'
 call plug#end()
 
 "split panes below/right the old one
@@ -38,6 +39,9 @@ noremap <leader><leader> "+
 noremap <leader>yg :%y+<CR>
 nnoremap <silent><Esc> :noh<CR>
 tnoremap <silent><C-q> <C-\><C-n>
+
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 command! Evimrc edit $MYVIMRC
 
