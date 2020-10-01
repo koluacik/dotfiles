@@ -1,8 +1,5 @@
 #/usr/bin/sh
 
-# layout is toggled from within XMonad.
-# TODO: convert this command to a one-time action in XMonad
-
 # xcompmgr -r 0 -o 0 -l 0 -t 0 -C -n
 dunst &
 
