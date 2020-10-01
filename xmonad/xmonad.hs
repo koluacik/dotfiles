@@ -104,7 +104,7 @@ unwantedKeys =
   ]
 
 myKeys =
-  [ ((              shiftMask  , xK_space      ), liftIO switchXkbLayout)
+  [ ((              controlMask, xK_space      ), liftIO switchXkbLayout)
   , ((myModMask                , xK_Print      ), spawn "scrotfeh select")
   , ((myModMask .|. shiftMask  , xK_m          ), sendMessage $ Toggle MIRROR)
   , ((myModMask .|. shiftMask  , xK_n          ), sendMessage $ Toggle NOBORDERS)
